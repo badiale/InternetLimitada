@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+
+  "name": "Internet Limitada",
+  "description": "Não espere até 2017 para ter sua internet limitada!",
+  "version": "1.0",
+
+  "browser_action": {
+    "default_icon": "wifi19.png",
+    "default_popup": "popup.html"
+  },
+  "permissions": [
+    "activeTab"
+  ]
+}

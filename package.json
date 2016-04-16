@@ -1,12 +1,24 @@
 {
   "name": "InternetLimitada",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Simule sua internet limitada hoje mesmo!",
+  "main": "src/index.js",
   "scripts": {
+    "lint": "standard src/**/*.js",
+    "clean": "rimraf dist",
+    "build-chrome": "mkdirp dist/chrome && browserify -e src/index.js -r ./src/browser/chrome/browser.js:browser -o dist/chrome/index.js -d && cpr resources/shared dist/chrome && cpr resources/chrome dist/chrome && svg2png resources/shared/wifi.svg --output=dist/chrome/wifi19.png --width=19 --height=19",
+    "build": "npm run lint && npm run clean && npm run build-chrome",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "cpr": "^1.1.1",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.5.2",
+    "standard": "^6.0.8",
+    "svg2png": "^3.0.0"
+  }
 }
