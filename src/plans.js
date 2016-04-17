@@ -2,12 +2,6 @@ var browser = require('browser')
 var Plan = require('./Plan')
 var size = require('./size')
 
-var plans = {
-  'Vivo 50MB': new Plan(89.9, byte(130))
-}
-
-exports.allPlans = Object.keys(plans).sort()
-
 exports.getPrice = function (bytes, callback) {
   getPlan(function (plan) {
     callback(plan.getPrice(bytes))
@@ -28,7 +22,7 @@ exports.isLimitExceeded = function (callback) {
 
 function getPlan (callback) {
   browser.options.get(function (options) {
-    callback(plans[ options.plan || 'Vivo 50MB' ])
+    callback(new Plan(options.price, byte(options.limit)))
   })
 }
 

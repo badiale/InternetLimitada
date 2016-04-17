@@ -1,20 +1,22 @@
 var browser = require('./browser')
-var plans = require('../../plans')
 var iconText = require('../../iconText')
 
-fillOptions('plan', plans.allPlans)
 fillOptions('icon', Object.keys(iconText).sort())
 browser.options.get(function (options) {
+  document.getElementById('price').value = options.price
+  document.getElementById('limit').value = options.limit
   document.getElementById('block').checked = options.block
 })
 
 var saveButton = document.getElementById('save')
 saveButton.addEventListener('click', function () {
-  var plan = getSelected('plan')
   var icon = getSelected('icon')
   var block = document.getElementById('block').checked
+  var price = parseFloat(document.getElementById('price').value)
+  var limit = parseFloat(document.getElementById('limit').value)
   browser.options.set({
-    plan: plan,
+    price: price,
+    limit: limit,
     icon: icon,
     block: block
   }, function () {

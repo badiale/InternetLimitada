@@ -40,7 +40,8 @@ exports.showTextOnIcon = function (text) {
 exports.options = {
   get: function (callback) {
     chrome.storage.sync.get({
-      plan: 'Vivo 50MB',
+      price: 89.9,
+      limit: 130,
       icon: 'bytes',
       block: true
     }, callback)
