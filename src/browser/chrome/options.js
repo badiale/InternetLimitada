@@ -4,14 +4,19 @@ var iconText = require('../../iconText')
 
 fillOptions('plan', plans.allPlans)
 fillOptions('icon', Object.keys(iconText).sort())
+browser.options.get(function (options) {
+  document.getElementById('block').checked = options.block
+})
 
 var saveButton = document.getElementById('save')
 saveButton.addEventListener('click', function () {
   var plan = getSelected('plan')
   var icon = getSelected('icon')
+  var block = document.getElementById('block').checked
   browser.options.set({
     plan: plan,
-    icon: icon
+    icon: icon,
+    block: block
   }, function () {
     saveButton.disabled = true
     saveButton.value = 'Salvo com sucesso'

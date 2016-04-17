@@ -5,6 +5,12 @@ exports.log = function () {
   console.log.apply(console, arguments)
 }
 
+exports.onRequestStart = function (callback) {
+  chrome.webRequest.onHeadersReceived.addListener(function (details) {
+    return { cancel: callback(details) }
+  }, { urls: [ 'http://*/*', 'https://*/*' ] }, [ 'blocking' ])
+}
+
 exports.onRequestEnd = function (callback) {
   chrome.webRequest.onCompleted.addListener(function (details) {
     callback(details.tabId, parseInt(findHeader(details.responseHeaders, 'content-length') || '0', 10))
@@ -35,7 +41,8 @@ exports.options = {
   get: function (callback) {
     chrome.storage.sync.get({
       plan: 'Vivo 50MB',
-      icon: 'bytes'
+      icon: 'bytes',
+      block: true
     }, callback)
   }, set: function (values, callback) {
     chrome.storage.sync.set(values, callback)
