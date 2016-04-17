@@ -1,21 +1,26 @@
 var browser = require('browser')
-var format = require('./format')
 var size = require('./size')
 var plans = require('./plans')
-
-updateBadge()
+var text = require('./iconText')
 
 browser.onRequestEnd(function (id, total) {
   size.addSize(id, total)
-  updateBadge()
 })
 
+setInterval(updateBadge, 500)
+
 function updateBadge () {
-  if (plans.isLimitExceeded()) {
-    browser.showIcon('nowifi')
-    browser.showTextOnIcon('')
-  } else {
-    browser.showIcon('wifi')
-    browser.showTextOnIcon(format.bytes(size.getMonthTotal()))
-  }
+  plans.isLimitExceeded(function (exceeded) {
+    if (exceeded) {
+      browser.showIcon('nowifi')
+      browser.showTextOnIcon('')
+    } else {
+      browser.showIcon('wifi')
+      browser.options.get(function (options) {
+        text[ options.icon ](function (value) {
+          browser.showTextOnIcon(value)
+        })
+      })
+    }
+  })
 }

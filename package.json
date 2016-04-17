@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "standard src/**/*.js",
     "clean": "rimraf dist",
-    "browserify-chrome": "browserify -e src/index.js -r ./src/browser/chrome/browser.js:browser -o dist/chrome/index.js && browserify -e src/browser/chrome/popup.js -r ./src/browser/chrome/browser.js:browser -o dist/chrome/popup.js",
+    "browserify-chrome": "browserify -e src/index.js -r ./src/browser/chrome/browser.js:browser -o dist/chrome/index.js && browserify -e src/browser/chrome/popup.js -r ./src/browser/chrome/browser.js:browser -o dist/chrome/popup.js && browserify -e src/browser/chrome/options.js -r ./src/browser/chrome/browser.js:browser -o dist/chrome/options.js",
     "build-chrome": "mkdirp dist/chrome && npm run browserify-chrome -d && cpr resources/shared dist/chrome && cpr resources/chrome dist/chrome && svg2png resources/shared/wifi.svg --output=dist/chrome/wifi19.png --width=19 --height=19 && svg2png resources/shared/nowifi.svg --output=dist/chrome/nowifi19.png --width=19 --height=19",
     "build": "npm run lint && npm run clean && npm run build-chrome",
     "test": "echo \"Error: no test specified\" && exit 1"

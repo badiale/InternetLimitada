@@ -9,11 +9,16 @@
     "default_icon": "wifi19.png",
     "default_popup": "popup.html"
   },
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
   "background": {
     "scripts": ["index.js"]
   },
   "permissions": [
     "activeTab",
+    "storage",
     "webRequest",
     "<all_urls>"
   ]

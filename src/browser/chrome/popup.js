@@ -11,17 +11,23 @@ function showSize () {
 }
 
 function showAlert () {
-  var show
-  if (plans.isLimitExceeded()) {
-    show = 'block'
-  } else {
-    show = 'none'
-  }
-  document.querySelector('.alert').style.display = show
+  plans.isLimitExceeded(function (exceeded) {
+    var show
+    if (exceeded) {
+      show = 'block'
+    } else {
+      show = 'none'
+    }
+    document.querySelector('.alert').style.display = show
+  })
 }
 
 function setTotal (id, value) {
   document.getElementById(id).innerHTML = format.bytes(value)
-  document.getElementById(id + '_percentage').innerHTML = format.percentage(plans.getPercentage(value))
-  document.getElementById(id + '_price').innerHTML = format.price(plans.getPrice(value))
+  plans.getPercentage(value, function (value) {
+    document.getElementById(id + '_percentage').innerHTML = format.percentage(value)
+  })
+  plans.getPrice(value, function (value) {
+    document.getElementById(id + '_price').innerHTML = format.price(value)
+  })
 }
