@@ -4,10 +4,9 @@
   "description": "Simule sua internet limitada hoje mesmo!",
   "main": "src/index.js",
   "scripts": {
-    "lint": "standard src/**/*.js",
+    "lint": "standard src/**/*.js builder/**/*.js",
     "clean": "rimraf dist",
-    "browserify-chrome": "browserify -e src/index.js -r ./src/browser/chrome/browser.js:browser -o dist/chrome/index.js && browserify -e src/browser/chrome/popup.js -r ./src/browser/chrome/browser.js:browser -o dist/chrome/popup.js && browserify -e src/browser/chrome/options.js -r ./src/browser/chrome/browser.js:browser -o dist/chrome/options.js",
-    "build-chrome": "mkdirp dist/chrome && npm run browserify-chrome -d && cpr resources/shared dist/chrome && cpr resources/chrome dist/chrome && svg2png resources/shared/wifi.svg --output=dist/chrome/wifi19.png --width=19 --height=19 && svg2png resources/shared/nowifi.svg --output=dist/chrome/nowifi19.png --width=19 --height=19",
+    "build-chrome": "node builder/chrome.js",
     "build": "npm run lint && npm run clean && npm run build-chrome",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,6 +17,8 @@
     "browserify": "^13.0.0",
     "cpr": "^1.1.1",
     "mkdirp": "^0.5.1",
+    "pn": "^1.0.0",
+    "q": "^1.4.1",
     "rimraf": "^2.5.2",
     "standard": "^6.0.8",
     "svg2png": "^3.0.0"
