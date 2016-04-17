@@ -9,7 +9,12 @@
     "default_icon": "wifi19.png",
     "default_popup": "popup.html"
   },
+  "background": {
+    "scripts": ["index.js"]
+  },
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "webRequest",
+    "<all_urls>"
   ]
 }

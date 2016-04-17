@@ -1,37 +1,48 @@
 <!doctype html>
-<!--
- This page is shown when the extension button is clicked, because the
- "browser_action" field in manifest.json contains the "default_popup" key with
- value "popup.html".
- -->
 <html>
 <head>
-    <title>Getting Started Extension's Popup</title>
+    <meta charset="utf-8">
+    <title>Internet Limitada</title>
     <style>
         body {
             font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
             font-size: 100%;
+            width: 140px;
         }
-        #status {
-            /* avoid an excessively wide status text */
-            white-space: pre;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            max-width: 400px;
+
+        strong {
+            margin-top: 10px;
+        }
+
+        strong, span {
+            display: block;
+        }
+
+        .alert {
+            display: none;
+            border: 1px darkred solid;
+            border-radius: 5px;
+            background-color: #ECC9C9;
+            color: darkred;
+            margin-top: 10px;
+            padding: 10px;
         }
     </style>
-
-    <!--
-      - JavaScript and HTML must be in separate files: see our Content Security
-      - Policy documentation[1] for details and explanation.
-      -
-      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
-     -->
-    <script src="index.js"></script>
 </head>
 <body>
-<div id="status"></div>
-<img id="image-result" hidden>
+
+<div class="alert">
+    <span>Sua internet acabou!</span>
+</div>
+
+<div>
+    <strong>Total do mês:</strong>
+    <span id="month"></span>
+    <span id="month_percentage"></span>
+    <span id="month_price"></span>
+</div>
+
+<script src="popup.js"></script>
 </body>
 </html>
 

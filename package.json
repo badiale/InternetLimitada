@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "standard src/**/*.js",
     "clean": "rimraf dist",
-    "build-chrome": "mkdirp dist/chrome && browserify -e src/index.js -r ./src/browser/chrome/browser.js:browser -o dist/chrome/index.js -d && cpr resources/shared dist/chrome && cpr resources/chrome dist/chrome && svg2png resources/shared/wifi.svg --output=dist/chrome/wifi19.png --width=19 --height=19",
+    "browserify-chrome": "browserify -e src/index.js -r ./src/browser/chrome/browser.js:browser -o dist/chrome/index.js && browserify -e src/browser/chrome/popup.js -r ./src/browser/chrome/browser.js:browser -o dist/chrome/popup.js",
+    "build-chrome": "mkdirp dist/chrome && npm run browserify-chrome -d && cpr resources/shared dist/chrome && cpr resources/chrome dist/chrome && svg2png resources/shared/wifi.svg --output=dist/chrome/wifi19.png --width=19 --height=19 && svg2png resources/shared/nowifi.svg --output=dist/chrome/nowifi19.png --width=19 --height=19",
     "build": "npm run lint && npm run clean && npm run build-chrome",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,5 +21,14 @@
     "rimraf": "^2.5.2",
     "standard": "^6.0.8",
     "svg2png": "^3.0.0"
+  },
+  "standard": {
+    "env": [
+      "node",
+      "browser"
+    ]
+  },
+  "dependencies": {
+    "bytes": "^2.3.0"
   }
 }
