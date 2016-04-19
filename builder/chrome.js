@@ -3,7 +3,9 @@ var dir = base.dir
 var bundle = base.bundler('./src/browser/chrome/browser.js')
 var cp = base.cp
 var resizeSVG = base.resizeSVG
+var zip = base.zip
 var error = base.error
+var manifest = require('../resources/chrome/manifest.json')
 
 dir('dist/chrome').then(function () {
   return bundle('src/index.js', 'dist/chrome/index.js')
@@ -25,4 +27,6 @@ dir('dist/chrome').then(function () {
   return resizeSVG('resources/shared/nowifi.svg', 'dist/chrome/nowifi128.png', 128)
 }).then(function () {
   return resizeSVG('resources/shared/wifi.svg', 'dist/chrome/wifi19.png', 19)
+}).then(function () {
+  return zip('dist/chrome', 'dist/' + manifest.name + '_chrome_' + manifest.version + '.zip')
 }).catch(error)

@@ -5,6 +5,7 @@ var browserify = require('browserify')
 var cpr = require('cpr')
 var pn = require('pn/fs')
 var svg2png = require('svg2png')
+var zip = require('zip-folder')
 
 exports.dir = function (name) {
   var defer = Q.defer()
@@ -51,6 +52,18 @@ exports.resizeSVG = function (file, dest, size) {
     .then(function (buffer) {
       return pn.writeFile(dest, buffer)
     })
+}
+
+exports.zip = function (dir, dest) {
+  var defer = Q.defer()
+  zip(dir, dest, function (err) {
+    if (err) {
+      defer.reject(err)
+      return
+    }
+    defer.resolve()
+  })
+  return defer.promise
 }
 
 exports.error = function () {
