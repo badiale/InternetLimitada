@@ -42,7 +42,7 @@ exports.options = {
     chrome.storage.sync.get({
       price: 89.9,
       limit: 130,
-      icon: 'bytes',
+      icon: 'Bytes',
       block: true
     }, callback)
   }, set: function (values, callback) {
